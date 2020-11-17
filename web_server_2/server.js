@@ -7,25 +7,16 @@ const app = express()
 app.use(express.static('public_html'))
 app.use(express.urlencoded())
 app.use(express.json())
-app.set('view engine', 'ejs')
 
 // HOME PAGE http://localhost:8000
 app.get('/',
     async (req, res) => {
         res.writeHead(200)
-        res.end('<h1>Hello World test</h1>')
+        res.end('<h1>Welcome offices microservice API</h1>')
     }
 )
 
-app.get('/byebye', async (req, res) => {
-    res.send('this is the bybye response')
-})
-const path = require('path')
 
-app.get('/chair', (request, response) => {
-    response.sendFile(path.join(__dirname, 'public_html', 'chair_response.html'))
-}
-)
 
 app.get('/test-param/:a', function (request, response) {
     response.writeHead(200, { 'Content-Type': 'text/html' })
@@ -44,23 +35,7 @@ app.use(express.urlencoded())
 app.use(express.json())
 // see /public_html/form_post.html
 // display form with http://localhost:8000/form_post.html
-app.post('/form_validate',
-    async (request, response) => {
-        // get the form inputs from the body of the HTTP request
-        console.log(request.body)
-        const username = request.body.username
-        const password = request.body.password
-        console.log('username=' + username + ' password=' + password)
-        // process form, validate data …
-        if (username === '' || password === '') {
-            response.writeHead(400, { 'Content-Type': 'text/html' })
-            response.end('missing username or password')
-        } else {
-            response.writeHead(200, { 'Content-Type': 'text/html' })
-            response.end('Thanks for submitting the form')
-        }
-    }
-)
+
 app.set('view engine', 'ejs')
 
 
@@ -111,25 +86,6 @@ app.get('/products', function (req, res) {
     res.render('master_template', pageData)
 })
 
-app.get('/seasons', (req, res) => {
-    const pageData = {}
-    pageData.title = 'list of seasons'
-    pageData.description = 'all the seasons'
-    pageData.author = 'Parth Amin'
-    const seasons = [
-        { id: 1, name: 'winter' },
-        { id: 2, name: 'summer' },
-        { id: 3, name: 'fall' }
-    ]
-    pageData.content = '<ul>'
-    for (let i = 0; i < seasons.length; i++) {
-        pageData.content += '<li>' + seasons[i].name + '</li>'
-    }
-    pageData.content += '</ul>'
-    res.render('master_template', pageData)
-})
-
-
 
 // for AJAX tests, returns the list of customers in a JSON string
 app.get('/customers', function (request, response) {
@@ -175,6 +131,30 @@ app.get('/employees', function (request, response) {
         response.writeHead(200, { 'Content-Type': 'application/json'})
        // send out a string
         response.end(employeesJSONString)
+    })
+});
+
+app.get('/offices', function (request, response) {
+    let DB = require('./src/dao');
+    DB.connect();
+    DB.query('SELECT * from offices',function (offices){
+        const officesJSON={offices:offices.rows}
+        const officesJSONString = JSON.stringify(officesJSON, null, 4)
+        // set content type
+        response.writeHead(200, { 'Content-Type': 'application/json'})
+       // send out a string
+        response.end(officesJSONString)
+    })
+});
+
+app.delete('/offices/:id', function (request, response) {
+    let id=request.params.id // read the :id value send in the URL
+    let DB = require('./src/dao');
+    DB.connect();
+    DB.queryParams('DELETE from offices WHERE officecode=$1',[id],function (offices){
+        response.writeHead(200, { 'Content-Type': 'text/html'})
+       // send out a string
+        response.end("OK office deleted")
     })
 });
 
