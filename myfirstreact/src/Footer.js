@@ -6,7 +6,7 @@ class Footer extends React.Component{
         // contructor code here
     }
          render(){
-            return ( <footer> &copy; </footer>)
+            return ( <footer> &copy;{this.props.authorName} </footer>)
         }
     }
 

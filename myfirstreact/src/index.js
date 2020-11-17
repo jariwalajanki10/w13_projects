@@ -29,8 +29,11 @@ class Person extends React.Component{
     render(){
        // return <span>Done! I am Janki.</span>
         return (
+           <div>
         <Header companyName="ABCD.com"/>
-        <Footer/>
+        <p>Hello World!</p>
+        <Footer authorName="Janki Jariwala"/>
+        </div>
        )
     }
 
