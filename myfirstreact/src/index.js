@@ -5,7 +5,8 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Header from './Header.js';
 import Footer from './Footer.js';
-import SelectList from './SelectList';
+import SelectList from './SelectList.js';
+import Offices from './Offices.js';
 
 
 
