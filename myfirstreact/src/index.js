@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import Header from './Header';
 import Footer from './Footer';
+import SelectList from './SelectList';
 import reportWebVitals from './reportWebVitals';
 
 // ReactDOM.render(
@@ -23,6 +24,24 @@ import reportWebVitals from './reportWebVitals';
 //     </div>
 //     )
 // }
+
+const provinces=[{code:'QC',name:'Quebec'},{code:'ON',name:'Ontario'},{code:'NB',name:'New-Brunswick'}]
+
+const countries=[{code:'CA',name:'Canada'},{code:'US',name:'USA'},{code:'IN',name:'India'},{code:'MX',name:'Mexixo'}]
+
+class Page extends React.Component{
+  render(){
+            return (
+            <div>
+                <Header companyName="blabla.com"/>
+                <p>Hello World !</p>
+                <SelectList array={provinces}/>
+                 <SelectList array={countries}/>
+                <Footer authorName="Stéphane Lapointe"/>
+            </div>
+        )
+    }
+}
 
 
 class Person extends React.Component{
