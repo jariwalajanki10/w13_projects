@@ -7,15 +7,16 @@ class Header extends React.Component{
         this.state = {companyName: this.props.companyName}
         // contructor code here
       }
-       changeName =()=>{
-                this.setState({companyName:"XYZ.com"})
+       changeName =(new_name)=>{
+                this.setState({companyName:new_name})
             }
 
          render(){
             return (
             <header className={styles.Header}>
                 This is the {this.state.companyName}
-                 <button onClick={()=>this.changeName()}>Change name</button>
+                 <button onClick={()=>this.changeName(document.getElementById('xyz123').value)}>Change name</button>
+                <input type="text" id="xyz123"/>
             </header>
         )
         }
