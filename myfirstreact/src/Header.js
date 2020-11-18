@@ -1,5 +1,5 @@
 import React from 'react'
-import './Header.css';
+import styles from './Header.module.css'
 
 class Header extends React.Component{
     constructor(props) {
@@ -13,7 +13,7 @@ class Header extends React.Component{
 
          render(){
             return (
-            <header className="Header">
+            <header className={styles.Header}>
                 This is the {this.state.companyName}
                  <button onClick={()=>this.changeName()}>Change name</button>
             </header>
