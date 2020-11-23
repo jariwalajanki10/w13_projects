@@ -67,6 +67,56 @@ app.get('/customers_list', function (request, response) {
     })
 })
 
+app.get('/offices/:id', (req, res) => {
+
+    const id = req.params.id
+
+    const DB = require('./src/dao')
+
+    DB.connect()
+
+    DB.queryParams('SELECT * from offices WHERE officecode=$1', [id],
+
+        function (offices) {
+
+            if (offices.rowCount === 1) {
+
+                const officesJSON = { msg: 'OK', offices: offices.rows[0] }
+
+                const officesJSONString = JSON.stringify(officesJSON, null, 4)
+
+                // set content type
+
+                res.writeHead(200, { 'Content-Type': 'application/json' })
+
+                // send out a string
+
+                res.end(officesJSONString)
+
+            } else {
+
+                // set content type
+
+                const officesJSON = { msg: 'Office not found' }
+
+                const officesJSONString = JSON.stringify(officesJSON, null, 4)
+
+                res.writeHead(404, { 'Content-Type': 'application/json' })
+
+                // send out a string
+
+                res.end(officesJSONString)
+
+            }
+
+
+            DB.disconnect()
+
+        }
+
+    )
+
+})
 
 app.get('/products', function (req, res) {
     const pageData = {} // initialize empty object
