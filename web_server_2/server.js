@@ -8,6 +8,9 @@ app.use(express.static('public_html'))
 app.use(express.urlencoded())
 app.use(express.json())
 
+const cors = require('cors')
+app.use(cors())
+
 // HOME PAGE http://localhost:8000
 app.get('/',
     async (req, res) => {

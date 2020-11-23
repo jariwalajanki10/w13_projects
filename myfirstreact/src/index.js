@@ -8,9 +8,6 @@ import Footer from './Footer.js';
 import SelectList from './SelectList.js';
 import Offices from './Offices.js';
 
-
-
-
 const provinces=[ {code:'QC',name:'Quebec'},{code:'ON',name:'Ontario'},{code:'NB',name:'New-Brunswick'}]
 
 const countries=[{code:'CA',name:'Canada'},{code:'US',name:'USA'},{code:'IN',name:'India'},{code:'MX',name:'Mexixo'}]
@@ -23,7 +20,8 @@ class Page extends React.Component{
                 <p>Hello World !</p>
                 <SelectList array={provinces}/>
                  <SelectList array={countries}/>
-                <Footer name="Janki"/>
+                 <Offices/>
+                <Footer authorName="Janki"/>
             </div>
         )
     }
