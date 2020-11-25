@@ -1,0 +1,11 @@
+.Header {
+    background-color: blue;
+    color: white;
+    text-align: center;
+}
+
+.Header button {
+    background-color: black;
+    color: grey;
+    padding: 5px;
+}
